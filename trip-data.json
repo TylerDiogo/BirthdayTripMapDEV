@@ -1,0 +1,62 @@
+[
+  {
+    "id": "nyc-jfk-out",
+    "order": 1,
+    "city": "New York",
+    "country": "USA",
+    "lat": 40.6413,
+    "lng": -73.7781,
+    "date": "Feb 4",
+    "note": "Depart JFK → LHR — Delta, Premium Select"
+  },
+  {
+    "id": "london-lhr",
+    "order": 2,
+    "city": "London",
+    "country": "UK",
+    "lat": 51.4700,
+    "lng": -0.4543,
+    "date": "Feb 5–7",
+    "note": "London stay before Virgin to Dubai"
+  },
+  {
+    "id": "dubai-dxb",
+    "order": 3,
+    "city": "Dubai",
+    "country": "UAE",
+    "lat": 25.2532,
+    "lng": 55.3657,
+    "date": "Feb 7–10",
+    "note": "Virgin LHR → DXB, Premium Select"
+  },
+  {
+    "id": "singapore-sin",
+    "order": 4,
+    "city": "Singapore",
+    "country": "Singapore",
+    "lat": 1.3644,
+    "lng": 103.9915,
+    "date": "Feb 10–14",
+    "note": "Singapore Air DXB → SIN, Premium Select"
+  },
+  {
+    "id": "tokyo-hnd",
+    "order": 5,
+    "city": "Tokyo",
+    "country": "Japan",
+    "lat": 35.5494,
+    "lng": 139.7798,
+    "date": "Feb 14–21",
+    "note": "Singapore Air SIN → HND, Premium Select"
+  },
+  {
+    "id": "nyc-lga-back",
+    "order": 6,
+    "city": "New York",
+    "country": "USA",
+    "lat": 40.7769,
+    "lng": -73.8740,
+    "date": "Feb 21",
+    "note": "Delta HND → LGA — Delta One Suites"
+  }
+]
