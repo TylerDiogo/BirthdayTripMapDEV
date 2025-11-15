@@ -14,6 +14,13 @@
 body {
   margin: 0;
   background-color: #020617;
+  min-height: 100%;
+}
+
+html,
+body,
+#root {
+  height: 100%;
 }
 
 .status {
@@ -29,20 +36,34 @@ body {
   color: #fecaca;
 }
 
-.app-shell {
+.app-root {
   display: flex;
-  min-height: 100vh;
+  height: 100vh;
   color: #f9fafb;
+  overflow: hidden;
 }
 
 .sidebar {
-  width: 360px;
-  max-width: 100%;
+  width: 340px;
+  min-width: 280px;
+  max-width: 360px;
   padding: 2rem 1.5rem;
   background: rgba(15, 23, 42, 0.95);
   backdrop-filter: blur(6px);
   border-right: 1px solid rgba(255, 255, 255, 0.1);
   overflow-y: auto;
+  height: 100vh;
+}
+
+.globe-container {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  height: 100vh;
+  background: radial-gradient(circle at top, rgba(15, 23, 42, 0.9), #020617 65%);
 }
 
 .sidebar header h1 {
@@ -116,8 +137,12 @@ body {
 }
 
 .globe {
-  flex: 1;
-  min-height: 100vh;
+  width: 100%;
+  height: 100%;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  min-height: 0;
 }
 
 .marker {
@@ -145,7 +170,7 @@ body {
 }
 
 @media (max-width: 900px) {
-  .app-shell {
+  .app-root {
     flex-direction: column;
   }
 
@@ -153,7 +178,17 @@ body {
     width: 100%;
   }
 
+  .globe-container,
+  .sidebar {
+    width: 100%;
+    height: auto;
+  }
+
+  .globe-container {
+    padding: 1rem;
+  }
+
   .globe {
-    min-height: 400px;
+    min-height: 420px;
   }
 }

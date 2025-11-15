@@ -5,13 +5,20 @@ import type { TripStop } from '../data';
 const DEFAULT_MAPBOX_TOKEN =
   'pk.eyJ1IjoidHlsZXJkaW9nbyIsImEiOiJjbTM2a3hsZDcwNmN4MmpxNGNpeGd0Nm5rIn0.d_aTkF3ueth7gfO9k6ui7g';
 
-mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN ?? DEFAULT_MAPBOX_TOKEN;
+const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN ?? DEFAULT_MAPBOX_TOKEN;
 
-const INITIAL_CAMERA = {
-  center: [20, 20] as [number, number],
-  zoom: 1.5,
-  pitch: 60,
-  bearing: -100,
+mapboxgl.accessToken = MAPBOX_TOKEN;
+
+// INITIAL_CAMERA uses Mapbox CameraOptions:
+// - center: where the camera is looking
+// - zoom: distance from the earth
+// - pitch: tilt angle (0 = top-down, ~60 = 3D)
+// - bearing: rotation (0 = north-up)
+const INITIAL_CAMERA: mapboxgl.CameraOptions = {
+  center: [-25, 32],
+  zoom: 1.85,
+  pitch: 58,
+  bearing: -75,
 };
 
 const adjustLongitudeForAntimeridian = (startLng: number, endLng: number) => {
@@ -65,6 +72,7 @@ const Globe = ({ stops, filteredStops, activeStopId, onSelectStop, isFiltering }
       container: containerRef.current,
       style: 'mapbox://styles/mapbox/dark-v11',
       projection: 'globe',
+      accessToken: MAPBOX_TOKEN,
       ...INITIAL_CAMERA,
     });
 
@@ -212,6 +220,7 @@ const Globe = ({ stops, filteredStops, activeStopId, onSelectStop, isFiltering }
       zoom: 3.5,
       speed: 0.8,
       pitch: 55,
+      bearing: INITIAL_CAMERA.bearing,
     });
   }, [activeStopId, isMapLoaded, stops]);
 

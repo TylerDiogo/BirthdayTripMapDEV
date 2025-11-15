@@ -18,7 +18,7 @@ const Sidebar = ({
   onSelectStop,
 }: SidebarProps) => {
   return (
-    <aside className="sidebar">
+    <>
       <header>
         <h1>30th Birthday Trip</h1>
         <p>Follow the journey around the world.</p>
@@ -35,7 +35,7 @@ const Sidebar = ({
         ))}
         {!stops.length && <p className="empty">No stops match that search.</p>}
       </div>
-    </aside>
+    </>
   );
 };
 

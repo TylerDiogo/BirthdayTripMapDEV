@@ -33,21 +33,25 @@ const App = () => {
   const isFiltering = Boolean(searchQuery.trim());
 
   return (
-    <div className="app-shell">
-      <Sidebar
-        stops={filteredStops}
-        activeStopId={activeStopId}
-        searchQuery={searchQuery}
-        onSearchChange={setSearchQuery}
-        onSelectStop={handleSelectStop}
-      />
-      <Globe
-        stops={stops}
-        filteredStops={filteredStops}
-        activeStopId={activeStopId}
-        onSelectStop={handleSelectStop}
-        isFiltering={isFiltering}
-      />
+    <div className="app-root">
+      <aside className="sidebar">
+        <Sidebar
+          stops={filteredStops}
+          activeStopId={activeStopId}
+          searchQuery={searchQuery}
+          onSearchChange={setSearchQuery}
+          onSelectStop={handleSelectStop}
+        />
+      </aside>
+      <main className="globe-container">
+        <Globe
+          stops={stops}
+          filteredStops={filteredStops}
+          activeStopId={activeStopId}
+          onSelectStop={handleSelectStop}
+          isFiltering={isFiltering}
+        />
+      </main>
     </div>
   );
 };
