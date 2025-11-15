@@ -118,7 +118,6 @@ const Globe = ({ stops, filteredStops, activeStopId, onSelectStop, isFiltering }
       el.addEventListener('click', (event) => {
         event.stopPropagation();
         onSelectStop(stop);
-        map.flyTo({ center: [stop.lng, stop.lat], zoom: 3.5, speed: 0.8, pitch: 45 });
       });
 
       const marker = new mapboxgl.Marker({ element: el }).setLngLat([stop.lng, stop.lat]).addTo(map);
@@ -192,6 +191,19 @@ const Globe = ({ stops, filteredStops, activeStopId, onSelectStop, isFiltering }
       });
     }
   }, [stops, filteredIds, isFiltering, isMapLoaded]);
+
+  useEffect(() => {
+    if (!mapRef.current || !isMapLoaded || !activeStopId) return;
+    const targetStop = stops.find((stop) => stop.id === activeStopId);
+    if (!targetStop) return;
+
+    mapRef.current.flyTo({
+      center: [targetStop.lng, targetStop.lat],
+      zoom: 3.5,
+      speed: 0.8,
+      pitch: 45,
+    });
+  }, [activeStopId, isMapLoaded, stops]);
 
   return <div className="globe" ref={containerRef} role="presentation" />;
 };
