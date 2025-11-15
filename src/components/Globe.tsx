@@ -7,20 +7,30 @@ const DEFAULT_MAPBOX_TOKEN =
 
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN ?? DEFAULT_MAPBOX_TOKEN;
 
-const INITIAL_VIEW_STATE = {
+const INITIAL_CAMERA = {
   center: [20, 20] as [number, number],
-  zoom: 1.4,
-  pitch: 45,
-  bearing: 10,
+  zoom: 1.5,
+  pitch: 60,
+  bearing: -100,
+};
+
+const adjustLongitudeForAntimeridian = (startLng: number, endLng: number) => {
+  if (Math.abs(endLng - startLng) <= 180) {
+    return endLng;
+  }
+  return endLng > startLng ? endLng - 360 : endLng + 360;
 };
 
 const createArcCoordinates = (from: TripStop, to: TripStop) => {
   const steps = 64;
   const coords: [number, number, number][] = [];
+  const startLng = from.lng;
+  const endLng = adjustLongitudeForAntimeridian(startLng, to.lng);
+
   for (let i = 0; i <= steps; i += 1) {
     const t = i / steps;
     const lat = from.lat + (to.lat - from.lat) * t;
-    const lng = from.lng + (to.lng - from.lng) * t;
+    const lng = startLng + (endLng - startLng) * t;
     const altitude = Math.sin(Math.PI * t) * 400000; // meters above ground
     coords.push([lng, lat, altitude]);
   }
@@ -55,7 +65,7 @@ const Globe = ({ stops, filteredStops, activeStopId, onSelectStop, isFiltering }
       container: containerRef.current,
       style: 'mapbox://styles/mapbox/dark-v11',
       projection: 'globe',
-      ...INITIAL_VIEW_STATE,
+      ...INITIAL_CAMERA,
     });
 
     map.on('load', () => {
@@ -201,7 +211,7 @@ const Globe = ({ stops, filteredStops, activeStopId, onSelectStop, isFiltering }
       center: [targetStop.lng, targetStop.lat],
       zoom: 3.5,
       speed: 0.8,
-      pitch: 45,
+      pitch: 55,
     });
   }, [activeStopId, isMapLoaded, stops]);
 

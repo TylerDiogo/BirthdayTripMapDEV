@@ -3,3 +3,6 @@ node_modules
 .env
 /dist
 .vscode
+*.tsbuildinfo
+vite.config.js
+vite.config.d.ts
